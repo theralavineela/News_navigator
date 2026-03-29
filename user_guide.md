@@ -10,7 +10,9 @@ General Users
 
  How to Use
 
-Step 1: Launch the Application
+Step 1: Launch the Application 
+<img width="700" height="700" alt="frontend" src="https://github.com/user-attachments/assets/5fcc814e-62a0-4d80-99a6-f8a2e178f66d" />
+
 - Start backend server
 - Run frontend (Streamlit)
 - Open app in browser
