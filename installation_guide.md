@@ -2,7 +2,7 @@
 
 
 
-###**1.clone the repository**
+**1.clone the repository**
 ```bash
 git clone https://github.com/your-username/news-navigator-ai.git
 cd news-navigator-ai
