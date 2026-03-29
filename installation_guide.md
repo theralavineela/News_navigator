@@ -1,16 +1,17 @@
 ##  Installation & Setup Guide
 
-### 1. Clone the Repository
 
+
+###**1.clone the repository**
 ```bash
 git clone https://github.com/your-username/news-navigator-ai.git
 cd news-navigator-ai
-exit
+
 ### **2. Backend Setup**
-```bash
+
 cd backend
 pip install -r requirements.txt
-exit
+
 ### **3. Add Environment Variables**
 
 Create a .env file inside the backend/ folder:
