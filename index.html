@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Navigator AI 🧭</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent: #6c5ce7;
+            --text: #e0e0e0;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            padding: 2rem;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-container {
+            position: relative;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 10px;
+            border: 1px solid var(--glass);
+            display: flex;
+            gap: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 1rem;
+            color: white;
+            font-size: 1.2rem;
+            outline: none;
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
+        }
+
+        .results {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass);
+            border-radius: 25px;
+            padding: 2rem;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        .history-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .history-list {
+            margin-top: 1rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .history-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .history-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>News Navigator AI 🧭</h1>
+            <p>Real-time insights on any topic powered by Groq</p>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="topicInput" placeholder="Enter a topic (e.g. AI in Healthcare)..." onkeypress="if(event.key==='Enter') analyze()">
+            <button onclick="analyze()">Analyze</button>
+        </div>
+
+        <div id="loader" class="loader">Fetching the latest news and generating briefing... ✨</div>
+
+        <div id="results" class="results">
+            <div id="output" class="card"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <button class="history-btn" onclick="loadHistory()">View Recent History</button>
+            <div id="historyList" class="history-list"></div>
+        </div>
+    </div>
+
+    <script>
+        async function analyze() {
+            const topic = document.getElementById('topicInput').value;
+            if (!topic) return;
+
+            const loader = document.getElementById('loader');
+            const results = document.getElementById('results');
+            const output = document.getElementById('output');
+
+            loader.style.display = 'block';
+            results.style.display = 'none';
+
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: topic })
+                });
+                const data = await response.json();
+                output.innerText = data.text;
+                results.style.display = 'block';
+            } catch (error) {
+                output.innerText = 'Error: ' + error.message;
+                results.style.display = 'block';
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        async function loadHistory() {
+            const list = document.getElementById('historyList');
+            list.innerHTML = 'Loading...';
+            
+            try {
+                const response = await fetch('/history');
+                const data = await response.json();
+                const history = data.history || [];
+                
+                list.innerHTML = '';
+                history.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'history-item';
+                    div.innerHTML = `<strong>${item.topic}</strong> <small>(${new Date(item.created_at).toLocaleString()})</small>`;
+                    div.onclick = () => {
+                        document.getElementById('topicInput').value = item.topic;
+                        document.getElementById('output').innerText = item.briefing;
+                        document.getElementById('results').style.display = 'block';
+                    };
+                    list.appendChild(div);
+                });
+            } catch (error) {
+                list.innerHTML = 'Error loading history';
+            }
+        }
+    </script>
+</body>
+</html>
