@@ -59,15 +59,5 @@ News Navigator AI aggregates real-time news and uses AI to:
 - FastAPI (Backend)
 - Streamlit (Frontend)
 - NewsAPI (Data)
-- Groq API (AI)
+- Groq API (LLM)
 
-## ⚙️ Setup Instructions
-
-### 1. Clone repo
-```bash
-git clone <your_repo_link>
-cd news-navigator-ai
-### 2.Backend
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
