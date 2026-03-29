@@ -27,7 +27,7 @@ News Navigator AI aggregates real-time news and uses AI to:
 - NewsAPI (Data)
 - Groq API (AI)
 ## Team
--Therala Vineela 
--Gade Mallikarjun
+- Therala Vineela 
+- Gade Mallikarjun
 
 
