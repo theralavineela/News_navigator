@@ -11,15 +11,19 @@ General Users
  How to Use
 
 Step 1: Launch the Application 
-<img width="700" height="700" alt="frontend" src="https://github.com/user-attachments/assets/5fcc814e-62a0-4d80-99a6-f8a2e178f66d" />
-
+<p align="center">
+<img width="500" height="500" alt="frontend" src="https://github.com/user-attachments/assets/5fcc814e-62a0-4d80-99a6-f8a2e178f66d" />
+</p>
 - Start backend server
 - Run frontend (Streamlit)
 - Open app in browser
 
 Step 2: Enter a Topic
-
-In the input box, type any topic such as:
+In the input
+<p align="center">
+<img width="500" height="500" alt="search bar" src="https://github.com/user-attachments/assets/1327824b-ba95-4c16-89d1-c05dcb504feb" />
+</p>
+ box, type any topic such as:
 
 “AI in healthcare”
 “India economy”
@@ -32,7 +36,9 @@ The system will:
 - Process it using AI
 
 Step 4: View Output
-
+<p align="center">
+<img width="1366" height="666" alt="insights" src="https://github.com/user-attachments/assets/2a5394eb-242a-40ce-88d0-ad66ee6b075c" />
+</p>
 You will get:
 
 ✅ Summary — Quick overview
