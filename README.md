@@ -26,7 +26,7 @@ News Navigator AI aggregates real-time news and uses AI to:
 - Streamlit (Frontend)(version1)
 - NewsAPI (Data)
 - Groq API (AI)
-- Anti gravity(Frontend app deployment)
+- Anti gravity(Frontend  deployment)
 ## Team
 - Therala Vineela 
 - Gade Mallikarjun
